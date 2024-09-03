@@ -66,10 +66,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Handle button click
     function display(e) {
         let span = document.querySelector("#span");
-        if (e.target.tagName === 'BUTTON' && !isNaN(e.target.value)) {
+        if (e.target.tagName === 'BUTTON' && e.target.value !== '=' && e.target.value !== 'C') {
             span.innerText += e.target.value;
-        } else if (e.target.tagName === 'BUTTON' && isNaN(e.target.value)) {
-            alert('Only numbers are allowed!');
         }
     }
 
@@ -95,14 +93,14 @@ document.addEventListener('DOMContentLoaded', function () {
     // Handle keyboard events
     document.addEventListener('keydown', (event) => {
         let span = document.querySelector("#span");
-        if ((event.key >= 0 && event.key <= 9)) {
+        if ((event.key >= 0 && event.key <= 9) || ['+', '-', '*', '/'].includes(event.key)) {
             span.innerText += event.key;
         } else if (event.key === 'Enter') {
             result();
         } else if (event.key === 'Backspace') {
             span.innerText = span.innerText.slice(0, -1);
         } else {
-            alert('Only numbers are allowed!');
+            alert('Only numbers and operators are allowed!');
             event.preventDefault();
         }
     });
